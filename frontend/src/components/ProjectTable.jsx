@@ -32,7 +32,7 @@ function ProjectTable({ projects, onProjectDeleted }) {
   };
   
   const handleDelete = async (projectCode) => {
-    if (window.confirm(`确定要删除项目 ${projectCode} 吗？`)) {
+    if (window.confirm(`Are you sure you want to delete project ${projectCode}?`)) {
       setIsDeleting(true);
       setError(null);
       
@@ -42,7 +42,7 @@ function ProjectTable({ projects, onProjectDeleted }) {
           onProjectDeleted();
         }
       } catch (err) {
-        setError(err.response?.data?.message || '删除项目失败，请重试。');
+        setError(err.response?.data?.message || 'Failed to delete project, please try again.');
       } finally {
         setIsDeleting(false);
       }
@@ -57,21 +57,21 @@ function ProjectTable({ projects, onProjectDeleted }) {
         <thead>
           <tr>
             <th onClick={() => handleSort('project_code')}>
-              项目代码 {sortField === 'project_code' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Project Code {sortField === 'project_code' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('project_name')}>
-              项目名称 {sortField === 'project_name' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Project Name {sortField === 'project_name' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('project_description')}>
-              项目描述
+              Project Description
             </th>
-            <th>操作</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {sortedProjects.length === 0 ? (
             <tr>
-              <td colSpan="4">暂无项目数据</td>
+              <td colSpan="4">No project data available</td>
             </tr>
           ) : (
             sortedProjects.map((project) => (
@@ -85,7 +85,7 @@ function ProjectTable({ projects, onProjectDeleted }) {
                     onClick={() => handleDelete(project.project_code)}
                     disabled={isDeleting}
                   >
-                    删除
+                    Delete
                   </button>
                 </td>
               </tr>

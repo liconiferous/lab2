@@ -31,7 +31,7 @@ function EmployeeForm({ onEmployeeAdded }) {
       await createEmployee(formData);
       setSuccess(true);
       
-      // 重置表单
+      // Reset form
       setFormData({
         employee_id: '',
         full_name: '',
@@ -39,17 +39,17 @@ function EmployeeForm({ onEmployeeAdded }) {
         hashed_password: ''
       });
       
-      // 通知父组件重新加载数据
+      // Notify parent component to reload data
       if (onEmployeeAdded) {
         onEmployeeAdded();
       }
       
-      // 3秒后隐藏成功消息
+      // Hide success message after 3 seconds
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
     } catch (err) {
-      setError(err.response?.data?.message || '添加员工失败，请重试。');
+      setError(err.response?.data?.message || 'Failed to add employee, please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -57,12 +57,12 @@ function EmployeeForm({ onEmployeeAdded }) {
   
   return (
     <div className="form-container">
-      {success && <div className="success-message">员工添加成功！</div>}
+      {success && <div className="success-message">Employee added successfully!</div>}
       {error && <div className="error-message">{error}</div>}
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="employee_id">员工编号:</label>
+          <label htmlFor="employee_id">Employee ID:</label>
           <input
             type="text"
             id="employee_id"
@@ -71,12 +71,12 @@ function EmployeeForm({ onEmployeeAdded }) {
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            placeholder="如：E001"
+            placeholder="e.g. E001"
           />
         </div>
         
         <div className="form-group">
-          <label htmlFor="full_name">姓名:</label>
+          <label htmlFor="full_name">Full Name:</label>
           <input
             type="text"
             id="full_name"
@@ -89,7 +89,7 @@ function EmployeeForm({ onEmployeeAdded }) {
         </div>
         
         <div className="form-group">
-          <label htmlFor="email">邮箱:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
@@ -102,7 +102,7 @@ function EmployeeForm({ onEmployeeAdded }) {
         </div>
         
         <div className="form-group">
-          <label htmlFor="hashed_password">密码:</label>
+          <label htmlFor="hashed_password">Password:</label>
           <input
             type="password"
             id="hashed_password"
@@ -115,7 +115,7 @@ function EmployeeForm({ onEmployeeAdded }) {
         </div>
         
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? '添加中...' : '添加员工'}
+          {isSubmitting ? 'Adding...' : 'Add Employee'}
         </button>
       </form>
     </div>

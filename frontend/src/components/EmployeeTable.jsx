@@ -32,7 +32,7 @@ function EmployeeTable({ employees, onEmployeeDeleted }) {
   };
   
   const handleDelete = async (employeeId) => {
-    if (window.confirm(`确定要删除员工 ${employeeId} 吗？`)) {
+    if (window.confirm(`Are you sure you want to delete employee ${employeeId}?`)) {
       setIsDeleting(true);
       setError(null);
       
@@ -42,7 +42,7 @@ function EmployeeTable({ employees, onEmployeeDeleted }) {
           onEmployeeDeleted();
         }
       } catch (err) {
-        setError(err.response?.data?.message || '删除员工失败，请重试。');
+        setError(err.response?.data?.message || 'Failed to delete employee, please try again.');
       } finally {
         setIsDeleting(false);
       }
@@ -57,21 +57,21 @@ function EmployeeTable({ employees, onEmployeeDeleted }) {
         <thead>
           <tr>
             <th onClick={() => handleSort('employee_id')}>
-              员工编号 {sortField === 'employee_id' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Employee ID {sortField === 'employee_id' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('full_name')}>
-              姓名 {sortField === 'full_name' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Full Name {sortField === 'full_name' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('email')}>
-              邮箱 {sortField === 'email' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Email {sortField === 'email' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
-            <th>操作</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {sortedEmployees.length === 0 ? (
             <tr>
-              <td colSpan="4">暂无员工数据</td>
+              <td colSpan="4">No employee data available</td>
             </tr>
           ) : (
             sortedEmployees.map((employee) => (
@@ -85,7 +85,7 @@ function EmployeeTable({ employees, onEmployeeDeleted }) {
                     onClick={() => handleDelete(employee.employee_id)}
                     disabled={isDeleting}
                   >
-                    删除
+                    Delete
                   </button>
                 </td>
               </tr>

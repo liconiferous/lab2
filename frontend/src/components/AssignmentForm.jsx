@@ -6,7 +6,7 @@ function AssignmentForm({ onAssignmentAdded }) {
   const [formData, setFormData] = useState({
     employee_id: '',
     project_code: '',
-    start_date: new Date().toISOString().split('T')[0] // 默认今天日期
+    start_date: new Date().toISOString().split('T')[0] // Default to today's date
   });
   
   const [employees, setEmployees] = useState([]);
@@ -16,7 +16,7 @@ function AssignmentForm({ onAssignmentAdded }) {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   
-  // 加载员工和项目数据
+  // Load employee and project data
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
@@ -28,7 +28,7 @@ function AssignmentForm({ onAssignmentAdded }) {
         setEmployees(employeesData);
         setProjects(projectsData);
         
-        // 如果有数据，默认选择第一个
+        // If data exists, select the first one by default
         if (employeesData.length > 0) {
           setFormData(prev => ({ ...prev, employee_id: employeesData[0].employee_id }));
         }
@@ -36,7 +36,7 @@ function AssignmentForm({ onAssignmentAdded }) {
           setFormData(prev => ({ ...prev, project_code: projectsData[0].project_code }));
         }
       } catch (err) {
-        setError('加载数据失败，请刷新页面重试。');
+        setError('Failed to load data, please refresh and try again.');
         console.error(err);
       } finally {
         setIsLoading(false);
@@ -63,40 +63,40 @@ function AssignmentForm({ onAssignmentAdded }) {
       await createAssignment(formData);
       setSuccess(true);
       
-      // 重置日期，但保留选择的员工和项目
+      // Reset date but keep selected employee and project
       setFormData({
         ...formData,
         start_date: new Date().toISOString().split('T')[0]
       });
       
-      // 通知父组件重新加载数据
+      // Notify parent component to reload data
       if (onAssignmentAdded) {
         onAssignmentAdded();
       }
       
-      // 3秒后隐藏成功消息
+      // Hide success message after 3 seconds
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
     } catch (err) {
-      setError(err.response?.data?.message || '创建分配失败，请重试。');
+      setError(err.response?.data?.message || 'Failed to create assignment, please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
   
   if (isLoading) {
-    return <div className="loading">加载中...</div>;
+    return <div className="loading">Loading...</div>;
   }
   
   return (
     <div className="form-container">
-      {success && <div className="success-message">项目分配创建成功！</div>}
+      {success && <div className="success-message">Assignment created successfully!</div>}
       {error && <div className="error-message">{error}</div>}
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="employee_id">员工:</label>
+          <label htmlFor="employee_id">Employee:</label>
           <select
             id="employee_id"
             name="employee_id"
@@ -106,7 +106,7 @@ function AssignmentForm({ onAssignmentAdded }) {
             disabled={isSubmitting || employees.length === 0}
           >
             {employees.length === 0 ? (
-              <option value="">暂无员工数据</option>
+              <option value="">No employee data available</option>
             ) : (
               employees.map(employee => (
                 <option key={employee._id} value={employee.employee_id}>
@@ -118,7 +118,7 @@ function AssignmentForm({ onAssignmentAdded }) {
         </div>
         
         <div className="form-group">
-          <label htmlFor="project_code">项目:</label>
+          <label htmlFor="project_code">Project:</label>
           <select
             id="project_code"
             name="project_code"
@@ -128,7 +128,7 @@ function AssignmentForm({ onAssignmentAdded }) {
             disabled={isSubmitting || projects.length === 0}
           >
             {projects.length === 0 ? (
-              <option value="">暂无项目数据</option>
+              <option value="">No project data available</option>
             ) : (
               projects.map(project => (
                 <option key={project._id} value={project.project_code}>
@@ -140,7 +140,7 @@ function AssignmentForm({ onAssignmentAdded }) {
         </div>
         
         <div className="form-group">
-          <label htmlFor="start_date">开始日期:</label>
+          <label htmlFor="start_date">Start Date:</label>
           <input
             type="date"
             id="start_date"
@@ -156,7 +156,7 @@ function AssignmentForm({ onAssignmentAdded }) {
           type="submit" 
           disabled={isSubmitting || employees.length === 0 || projects.length === 0}
         >
-          {isSubmitting ? '分配中...' : '分配到项目'}
+          {isSubmitting ? 'Assigning...' : 'Assign to Project'}
         </button>
       </form>
     </div>

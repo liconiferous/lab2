@@ -30,24 +30,24 @@ function ProjectForm({ onProjectAdded }) {
       await createProject(formData);
       setSuccess(true);
       
-      // 重置表单
+      // Reset form
       setFormData({
         project_code: '',
         project_name: '',
         project_description: ''
       });
       
-      // 通知父组件重新加载数据
+      // Notify parent component to reload data
       if (onProjectAdded) {
         onProjectAdded();
       }
       
-      // 3秒后隐藏成功消息
+      // Hide success message after 3 seconds
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
     } catch (err) {
-      setError(err.response?.data?.message || '添加项目失败，请重试。');
+      setError(err.response?.data?.message || 'Failed to add project, please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -55,12 +55,12 @@ function ProjectForm({ onProjectAdded }) {
   
   return (
     <div className="form-container">
-      {success && <div className="success-message">项目添加成功！</div>}
+      {success && <div className="success-message">Project added successfully!</div>}
       {error && <div className="error-message">{error}</div>}
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="project_code">项目代码:</label>
+          <label htmlFor="project_code">Project Code:</label>
           <input
             type="text"
             id="project_code"
@@ -69,12 +69,12 @@ function ProjectForm({ onProjectAdded }) {
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            placeholder="如：P001"
+            placeholder="e.g. P001"
           />
         </div>
         
         <div className="form-group">
-          <label htmlFor="project_name">项目名称:</label>
+          <label htmlFor="project_name">Project Name:</label>
           <input
             type="text"
             id="project_name"
@@ -87,7 +87,7 @@ function ProjectForm({ onProjectAdded }) {
         </div>
         
         <div className="form-group">
-          <label htmlFor="project_description">项目描述:</label>
+          <label htmlFor="project_description">Project Description:</label>
           <textarea
             id="project_description"
             name="project_description"
@@ -100,7 +100,7 @@ function ProjectForm({ onProjectAdded }) {
         </div>
         
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? '添加中...' : '添加项目'}
+          {isSubmitting ? 'Adding...' : 'Add Project'}
         </button>
       </form>
     </div>

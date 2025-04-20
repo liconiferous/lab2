@@ -31,7 +31,7 @@ function App() {
       setDataLoaded(prev => ({ ...prev, assignments: true }));
       setError(null);
     } catch (err) {
-      setError('加载项目分配失败，请稍后重试。');
+      setError('Failed to load assignments, please try again later.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -48,7 +48,7 @@ function App() {
       setDataLoaded(prev => ({ ...prev, employees: true }));
       setError(null);
     } catch (err) {
-      setError('加载员工数据失败，请稍后重试。');
+      setError('Failed to load employee data, please try again later.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -65,7 +65,7 @@ function App() {
       setDataLoaded(prev => ({ ...prev, projects: true }));
       setError(null);
     } catch (err) {
-      setError('加载项目数据失败，请稍后重试。');
+      setError('Failed to load project data, please try again later.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -73,7 +73,7 @@ function App() {
   };
 
   useEffect(() => {
-    // 根据当前激活的选项卡加载数据
+    // Load data based on the currently active tab
     if (activeTab === 'assignments') {
       loadAssignments();
     } else if (activeTab === 'employees') {
@@ -83,7 +83,7 @@ function App() {
     }
   }, [activeTab]);
 
-  // 修改刷新函数以重置加载状态
+  // Functions to refresh data
   const refreshAssignments = () => {
     setDataLoaded(prev => ({ ...prev, assignments: false }));
     loadAssignments();
@@ -106,7 +106,7 @@ function App() {
 
   const renderContent = () => {
     if (isLoading) {
-      return <div className="loading">加载中...</div>;
+      return <div className="loading">Loading...</div>;
     }
 
     if (error) {
@@ -118,12 +118,12 @@ function App() {
         return (
           <>
             <section className="form-section">
-              <h2>创建新项目分配</h2>
+              <h2>Create New Assignment</h2>
               <AssignmentForm onAssignmentAdded={refreshAssignments} />
             </section>
             
             <section className="table-section">
-              <h2>项目分配列表</h2>
+              <h2>Assignment List</h2>
               <AssignmentTable 
                 assignments={assignments} 
                 onAssignmentDeleted={refreshAssignments} 
@@ -135,12 +135,12 @@ function App() {
         return (
           <>
             <section className="form-section">
-              <h2>添加新员工</h2>
+              <h2>Add New Employee</h2>
               <EmployeeForm onEmployeeAdded={refreshEmployees} />
             </section>
             
             <section className="table-section">
-              <h2>员工列表</h2>
+              <h2>Employee List</h2>
               <EmployeeTable 
                 employees={employees} 
                 onEmployeeDeleted={refreshEmployees} 
@@ -152,12 +152,12 @@ function App() {
         return (
           <>
             <section className="form-section">
-              <h2>添加新项目</h2>
+              <h2>Add New Project</h2>
               <ProjectForm onProjectAdded={refreshProjects} />
             </section>
             
             <section className="table-section">
-              <h2>项目列表</h2>
+              <h2>Project List</h2>
               <ProjectTable 
                 projects={projects} 
                 onProjectDeleted={refreshProjects} 
@@ -173,26 +173,26 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>员工项目管理系统</h1>
+        <h1>Employee Project Management System</h1>
         <nav className="main-nav">
           <ul>
             <li 
               className={activeTab === 'assignments' ? 'active' : ''}
               onClick={() => handleTabChange('assignments')}
             >
-              项目分配
+              Assignments
             </li>
             <li 
               className={activeTab === 'employees' ? 'active' : ''}
               onClick={() => handleTabChange('employees')}
             >
-              员工管理
+              Employees
             </li>
             <li 
               className={activeTab === 'projects' ? 'active' : ''}
               onClick={() => handleTabChange('projects')}
             >
-              项目管理
+              Projects
             </li>
           </ul>
         </nav>

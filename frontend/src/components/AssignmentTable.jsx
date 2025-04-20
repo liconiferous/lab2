@@ -37,7 +37,7 @@ function AssignmentTable({ assignments, onAssignmentDeleted }) {
   };
   
   const handleDelete = async (assignmentId) => {
-    if (window.confirm('确定要删除此项目分配吗？')) {
+    if (window.confirm('Are you sure you want to delete this assignment?')) {
       setIsDeleting(true);
       setError(null);
       
@@ -47,7 +47,7 @@ function AssignmentTable({ assignments, onAssignmentDeleted }) {
           onAssignmentDeleted();
         }
       } catch (err) {
-        setError(err.response?.data?.message || '删除分配失败，请重试。');
+        setError(err.response?.data?.message || 'Failed to delete assignment, please try again.');
       } finally {
         setIsDeleting(false);
       }
@@ -62,27 +62,27 @@ function AssignmentTable({ assignments, onAssignmentDeleted }) {
         <thead>
           <tr>
             <th onClick={() => handleSort('employee_id')}>
-              员工编号 {sortField === 'employee_id' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Employee ID {sortField === 'employee_id' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('employee_name')}>
-              员工姓名 {sortField === 'employee_name' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Employee Name {sortField === 'employee_name' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('project_code')}>
-              项目代码 {sortField === 'project_code' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Project Code {sortField === 'project_code' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('project_name')}>
-              项目名称 {sortField === 'project_name' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Project Name {sortField === 'project_name' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
             <th onClick={() => handleSort('start_date')}>
-              开始日期 {sortField === 'start_date' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Start Date {sortField === 'start_date' && (sortDirection === 'asc' ? '↑' : '↓')}
             </th>
-            <th>操作</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {sortedAssignments.length === 0 ? (
             <tr>
-              <td colSpan="6">暂无项目分配数据</td>
+              <td colSpan="6">No assignment data available</td>
             </tr>
           ) : (
             sortedAssignments.map((assignment) => (
@@ -98,7 +98,7 @@ function AssignmentTable({ assignments, onAssignmentDeleted }) {
                     onClick={() => handleDelete(assignment._id)}
                     disabled={isDeleting}
                   >
-                    删除
+                    Delete
                   </button>
                 </td>
               </tr>
