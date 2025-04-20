@@ -1,0 +1,46 @@
+.table-container {
+    overflow-x: auto;
+  }
+  
+  .assignment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .assignment-table th,
+  .assignment-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .assignment-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .assignment-table th:hover {
+    background-color: #e8e8e8;
+  }
+  
+  .assignment-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .assignment-table tbody tr:hover {
+    background-color: #f6f6f6;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .assignment-table {
+      font-size: 0.8rem;
+    }
+    
+    .assignment-table th,
+    .assignment-table td {
+      padding: 8px 10px;
+    }
+  }
