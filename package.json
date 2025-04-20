@@ -1,9 +1,16 @@
 {
+  "name": "lab2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-"dev": "concurrently \"npm run server\" \"npm run client\"",
-"server": "nodemon server/index.js",
-"client": "cd client && npm run dev"
-},
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && nodemon ./server/index.js",
+    "client": "cd frontend && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "concurrently": "^9.1.2"
   }
