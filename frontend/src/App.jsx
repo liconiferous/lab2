@@ -82,6 +82,17 @@ function App() {
       loadProjects();
     }
   }, [activeTab]);
+  
+	// Auto update every 60s
+    useEffect(() => {
+    let intervalId;
+    if (activeTab === 'assignments') {
+      intervalId = setInterval(() => {
+        refreshAssignments();
+      }, 60000);
+    }
+    return () => clearInterval(intervalId);
+  }, [activeTab]);
 
   // Functions to refresh data
   const refreshAssignments = () => {
