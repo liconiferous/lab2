@@ -96,12 +96,13 @@ cd lab2
 **Install dependencies**
 ```bash
 cd backend && npm install
-cd ../frontend && npm install
+cd frontend && npm install
 cd ..
+npm install
 ```
 
 **Configure environment variables**
-Create a .env in the server/ directory with:
+Create a .env in the backend directory with:
 ```bash
 PORT=5000
 MONGO_URI=<your MongoDB Atlas connection string>
@@ -159,3 +160,6 @@ Open your browser at http://localhost:5137.
 
 3. “Error fetching assignments” on UI
    - Confirm the server is running (npm run dev) and check browser console/network tab.
+  
+## Reflections
+A challenge I faced was ensuring the React frontend updated automatically every minute with new data from the backend. I solved this by implementing a client-side timer using setInterval to periodically fetch and update the data using Axios, ensuring real-time.
