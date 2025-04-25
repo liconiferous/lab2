@@ -76,6 +76,10 @@ This system provides the following functions:
 4. **Assign Employee to Project**
 - Select an existing employee and project, and pick a start date.
 
+5. **Auto-Refresh & Sorting**
+- Data refreshes every minute automatically.
+- Click column headers to sort ascending/descending.
+
 ## Installation Steps
 **Prerequisites**
 - Node.js
