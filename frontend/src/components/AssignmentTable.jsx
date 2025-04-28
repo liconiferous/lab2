@@ -20,7 +20,7 @@ function AssignmentTable({ assignments, onAssignmentDeleted }) {
     }
     
     return sortDirection === 'asc' ? comparison : -comparison;
-  });
+  }).slice(0, 5); // ← limit to the top five
   
   const handleSort = (field) => {
     if (field === sortField) {
